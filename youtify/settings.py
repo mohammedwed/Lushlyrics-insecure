@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,12 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+#Email Config
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'faoe2003@gmail.com'
+EMAIL_HOST_PASSWORD ='lctnmsjfbvqlmzgh'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_TIMEOUT = 300 # in seconds
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
