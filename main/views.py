@@ -6,6 +6,9 @@ from django.urls.base import reverse
 from django.contrib.auth import authenticate,login,logout
 from youtube_search import YoutubeSearch
 import json
+from django.contrib import messages
+from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated
 # import cardupdate
 
 
@@ -15,13 +18,11 @@ CONTAINER = json.load(f)
 
 def default(request):
     global CONTAINER
-
-
     if request.method == 'POST':
 
         add_playlist(request)
         return HttpResponse("")
-
+    
     song = 'kSFJGEHDCrQ'
     return render(request, 'player.html',{'CONTAINER':CONTAINER, 'song':song})
 
@@ -72,3 +73,19 @@ def add_playlist(request):
         cur_user.playlist_song_set.create(song_title=request.POST['title'],song_dur=request.POST['duration'],
         song_albumsrc = song__albumsrc,
         song_channel=request.POST['channel'], song_date_added=request.POST['date'],song_youtube_id=request.POST['songid'])
+
+def login_user(request):
+   if request.method == 'POST':
+      username = request.POST['username']
+      password = request.POST['password']
+      if '@' in username:
+         username = User.objects.get(email=username)
+      user = authenticate(request, username=username, password=password)
+      if user is not None:
+         login(request, user)
+         return redirect('default')
+      else:
+        messages.success(request, ("There Was An Error Logging In, Try Again"))
+        return redirect('login')
+   else: 
+      return render(request, 'login.html', {})
