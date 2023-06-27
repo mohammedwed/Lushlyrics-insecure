@@ -17,6 +17,8 @@ f = open('card.json', 'r')
 CONTAINER = json.load(f)
 
 def default(request):
+    if not request.user.is_authenticated:
+       return redirect('login')
     global CONTAINER
     if request.method == 'POST':
 
@@ -74,7 +76,7 @@ def add_playlist(request):
         song_albumsrc = song__albumsrc,
         song_channel=request.POST['channel'], song_date_added=request.POST['date'],song_youtube_id=request.POST['songid'])
 
-def login_user(request):
+def login_user(request, message = ""):
    if request.method == 'POST':
       username = request.POST['username']
       password = request.POST['password']
@@ -85,7 +87,12 @@ def login_user(request):
          login(request, user)
          return redirect('default')
       else:
-        messages.success(request, ("There Was An Error Logging In, Try Again"))
+        messages.success(request, ("Incorrect username / password"))
         return redirect('login')
    else: 
-      return render(request, 'login.html', {})
+      return render(request, 'login.html', {'message':message})
+   
+def logout_user(request):
+   logout(request)
+   messages.success(request, ("You were succesfully logged out"))
+   return redirect('login')
