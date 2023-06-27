@@ -135,8 +135,8 @@ STATICFILES_DIRS = [
 
 #Email Config
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'faoe2003@gmail.com'
-EMAIL_HOST_PASSWORD ='lctnmsjfbvqlmzgh'
+EMAIL_HOST_USER = '<your@gmail.com>'
+EMAIL_HOST_PASSWORD ='<password>'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_TIMEOUT = 300 # in seconds
