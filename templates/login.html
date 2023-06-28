@@ -27,6 +27,11 @@
         </a>
         <div class="signup_body">
             <form class="login_form" method='POST' action="" enctype="multipart/form-data">
+                {% load socialaccount %}
+                {% providers_media_js %}
+                <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>
+                <a href="/accounts/google/login/?process=login" class="btn btn-google">Log in with Google</a>
+                <a href="/accounts/github/login/?process=login" class="btn btn-github">Log in with Github</a>
                 {% csrf_token %}
                 <label for="login-username" class="label">
                     Email address or username

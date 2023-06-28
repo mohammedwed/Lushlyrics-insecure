@@ -42,9 +42,13 @@ def default(request):
     user_obj = User.objects.filter(username=request.user).first()
     profile_obj = Profile.objects.filter(user=user_obj).first()
 
-    if not profile_obj.is_verified:
-       messages.success(request, ("Profile is not verified, check your email"))
-       return redirect('token')
+    if profile_obj is None: 
+       pass
+   #  Test for email authentication only on users that registered using email
+    else:
+      if not profile_obj.is_verified:
+         messages.success(request, ("Profile is not verified, check your email"))
+         return redirect('token')
 
     global CONTAINER
     if request.method == 'POST':
