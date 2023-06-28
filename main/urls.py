@@ -10,5 +10,8 @@ urlpatterns = [
     path('login/', views.login_user, name='login'),
     path('logout/', views.logout_user, name='logout'),
     path('signup/', views.register_user, name='signup'),
-    path('token/', views.TokenSend, name='token')
+    path('token/', views.TokenSend, name='token'),
+    path('verify/<auth_token>', views.verify, name='verify'),
+    path('error/', views.error_page, name='error'), 
+    path('success/', views.success_page, name='success'),
 ]

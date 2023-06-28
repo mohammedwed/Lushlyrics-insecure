@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from .credentials import email, password
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -136,8 +137,8 @@ STATICFILES_DIRS = [
 
 #Email Config
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = '<your@gmail.com>'
-EMAIL_HOST_PASSWORD ='<password>'
+EMAIL_HOST_USER = email
+EMAIL_HOST_PASSWORD = password
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_TIMEOUT = 300 # in seconds

@@ -19,3 +19,12 @@ class playlist_song(models.Model):
 
     def __str__(self):
       return f'Title = {self.song_title}, Date = {self.song_date_added}'
+
+class Profile(models.Model): 
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    auth_token = models.CharField(max_length=100)
+    is_verified = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.user.username

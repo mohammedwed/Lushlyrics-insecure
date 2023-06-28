@@ -19,10 +19,11 @@
         var passw = /^[A-Za-z]\w{7,14}$/; 
         console.log(password);
 
-        if(!password.match(passw)){
-            confirm_password.setCustomValidity("Your password is too weak")
-        }
-        else if (password != confirm_password.value) {
+        // if(!password.match(passw)){
+        //     confirm_password.setCustomValidity("Your password is too weak")
+        // }
+        // else 
+        if (password != confirm_password.value) {
             confirm_password.setCustomValidity("Password did not match");
         } 
         else {

@@ -7,8 +7,14 @@
                     <h3 class="card-title text-center">We sent an email to you!</h3>
                     <div class="card-text text-center">
                         Please check your email
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="text-danger"> {{message}} </p>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     {% endblock %}
+ 
