@@ -15,11 +15,17 @@
 <script>
     function checkPassword(form) {
         const confirm_password = document.getElementById("cpwd");
-        var password = document.getElementById("pwd").value;
-        console.log(password)
-        if (password != confirm_password.value) {
+        var password = document.getElementById("pwd").value;  
+        var passw = /^[A-Za-z]\w{7,14}$/; 
+        console.log(password);
+
+        if(!password.match(passw)){
+            confirm_password.setCustomValidity("Your password is too weak")
+        }
+        else if (password != confirm_password.value) {
             confirm_password.setCustomValidity("Password did not match");
-        } else {
+        } 
+        else {
             confirm_password.setCustomValidity("");
         }
     }
@@ -34,30 +40,31 @@
         </div>
 
     <div class="signup_body">
-        <form class="login_form" method='POST' enctype="multipart/form-data">
+        <form class="login_form" method='POST' action="" enctype="multipart/form-data">
             {% csrf_token %}
 
             <span class='label signup-title center-align'>Sign up for free to start listening.</span>
-            <label for="sign-up-username" class="label">
-                What's your name?{% if not username %}
-                <span style="color:#f79862;">Username already exists</span>
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color:#f79862;">{{message}}</p>
+                {% endfor %}
             {% endif %}
+            <label for="sign-up-username" class="label">
+                Create a username 
             </label>
 
-            <input type="text" class="form_input" name="username" pattern="[A-Za-z]+" placeholder="Enter your name." required>
+            <input type="text" class="form_input" name="username" placeholder="username" required>
 
 
             <label for="sign-up-email" class="label">
-                What's your email?{% if not email %}
-                <span style="color:#f79862;">Email already exists</span>
-            {% endif %}
+                What's your email?
             </label>
 
             <input type="email" class="form_input" name="email" placeholder="Enter your email." required>
 
 
             <label for="sign-up-pwd" class="label">
-                Create a password
+                Create a password*
             </label>
             <input type="password" class="form_input" id="pwd" name="password" placeholder="Create a password."
                 required>
@@ -71,6 +78,7 @@
             <button class='btn btn_log_in' type="submit">Sign up</button>
             <div class="divider"></div>
             <p class='label center-align'>Already have an account? <a href="/login">Log in</a>.</p>
+            <p>*Your password should have between 7 to 16 characters and contain only characters, numeric digits, underscore and first character must be a letter</p>
         </form>
     </div>
 

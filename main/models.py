@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 # Create your models here.
 class playlist_user(models.Model):
@@ -19,5 +19,3 @@ class playlist_song(models.Model):
 
     def __str__(self):
       return f'Title = {self.song_title}, Date = {self.song_date_added}'
-
-

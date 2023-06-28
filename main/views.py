@@ -9,11 +9,27 @@ import json
 from django.contrib import messages
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.forms import UserCreationForm
+import re
 # import cardupdate
 
-
+passwordRegex = re.compile(r'''(
+    ^(?=.*[A-Z].*[A-Z])                # at least two capital letters
+    (?=.*[!@#$&*])                     # at least one of these special c-er
+    (?=.*[0-9].*[0-9])                 # at least two numeric digits
+    (?=.*[a-z].*[a-z].*[a-z])          # at least three lower case letters
+    .{8,}                              # at least 8 total digits
+    $
+    )''', re.VERBOSE)
 
 f = open('card.json', 'r')
+
+def IsPasswordSecure(password):
+   password_test = passwordRegex.search(password)
+   if (not password_test):
+      return False
+   return True
+
 CONTAINER = json.load(f)
 
 def default(request):
@@ -96,3 +112,32 @@ def logout_user(request):
    logout(request)
    messages.success(request, ("You were succesfully logged out"))
    return redirect('login')
+
+def register_user(request):
+  if request.method == 'POST':
+     username = request.POST['username']
+     email = request.POST['email']
+     password = request.POST['password']
+     
+    # Avoid username duplication
+     if User.objects.filter(username=username).exists():
+      messages.success(request, ("Username already exists"))
+      return redirect('signup')
+     
+     # Avoid email duplication
+     if User.objects.filter(email=email).exists(): 
+        messages.success(request, ('Email already exists'))
+        return redirect('signup')
+     
+     new_user = User.objects.create_user(username=username,email=email,password=password)
+     new_user.save()
+     user = authenticate(username=username, password=password)
+     login(request, user)
+     messages.success(request, ('User created successfully'))
+     return redirect('default')
+  
+  else:
+     return render(request, 'signup.html')
+  
+def TokenSend(request):
+   return render(request, 'token_send.html')
