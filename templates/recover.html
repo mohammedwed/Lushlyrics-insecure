@@ -1,0 +1,43 @@
+{% load static %}
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="https://cdn.discordapp.com/icons/715958380556058684/773d6583cd1d7aef41e701783d353aef.webp?size=128" type="image/x-icon">
+    <meta name="description" itemprop="description"
+            content="Play your playlists and favourites tracks, albums, and artists " />
+        <meta name="keywords"
+            content="convert, convert playlists, transfer, syncing, smart links, free, apple music, streaming services" />
+      {% block css %}
+        <link rel="stylesheet" href="{% static "formStyle.css" %}">
+      {% endblock %}
+        <title>Youttify</title>
+    </head>
+    
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+    
+                <div class="signup_header">
+                    <a href="" target="_blank"> </a>
+                    <h3>Password reset</h3>
+                    <p>Forgotten your password? Enter your email address below, and we'll email instructions for setting up a new one</p>
+                </div>
+            </a>
+            <div class="signup_body">
+                <form class="login_form" method="POST" enctype="multipart/form-data" action="">
+                    {% csrf_token %}
+                    {{form}}
+                    <input type="submit" class="btn btn_log_in" name="Send email">
+                </form>
+            </div>
+    
+            <!-- <div class="signin_body">
+    
+            </div> -->
+    
+        </body>
+    </body>
+    
+    </html>
