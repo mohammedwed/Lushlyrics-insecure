@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 from .models import playlist_user
 from django.urls.base import reverse
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CreateUserForm
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from youtube_search import YoutubeSearch
 import json
 # import cardupdate
@@ -12,7 +16,7 @@ import json
 
 f = open('card.json', 'r')
 CONTAINER = json.load(f)
-
+@login_required(login_url='LoginUser')
 def default(request):
     global CONTAINER
 
@@ -26,7 +30,7 @@ def default(request):
     return render(request, 'player.html',{'CONTAINER':CONTAINER, 'song':song})
 
 
-
+@login_required(login_url='LoginUser')
 def playlist(request):
     cur_user = playlist_user.objects.get(username = request.user)
     try:
@@ -43,7 +47,7 @@ def playlist(request):
     # print(list(playlist_row)[0].song_title)
     return render(request, 'playlist.html', {'song':song,'user_playlist':user_playlist})
 
-
+@login_required(login_url='LoginUser')
 def search(request):
   if request.method == 'POST':
 
@@ -61,7 +65,7 @@ def search(request):
 
 
 
-
+@login_required(login_url='LoginUser')
 def add_playlist(request):
     cur_user = playlist_user.objects.get(username = request.user)
 
@@ -72,3 +76,37 @@ def add_playlist(request):
         cur_user.playlist_song_set.create(song_title=request.POST['title'],song_dur=request.POST['duration'],
         song_albumsrc = song__albumsrc,
         song_channel=request.POST['channel'], song_date_added=request.POST['date'],song_youtube_id=request.POST['songid'])
+
+def loginUser(request):
+  if request.user.is_authenticated:
+    return redirect("default")
+  else:
+    if request.method == 'POST':
+      username = request.POST.get('username')
+      password = request.POST.get('password')
+      user = authenticate(request,username=username,password=password)
+      if user:
+        login(request,user)
+        return redirect("default")
+      else:
+        messages.info(request,"Username or Password is Incorrect!")
+    return render(request,'login.html',{})
+
+def LogoutUser(request):
+  logout(request)
+  return redirect("LoginUser")
+
+def registerUser(request):
+  if request.user.is_authenticated:
+    return redirect("default")
+  else:
+    form = CreateUserForm()
+    if request.method=='POST':
+      form = CreateUserForm(data=request.POST)
+      if form.is_valid():
+        form.save()
+        user = form.cleaned_data.get('username')
+        messages.success(request,"Account was created for "+user)
+        return redirect('LoginUser')
+    context = {'form':form}
+    return render(request,'signup.html',context)

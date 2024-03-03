@@ -51,7 +51,7 @@
                         d="M291.301 81.778l166.349 373.587-19.301 8.635-166.349-373.587zM64 463.746v-384h21.334v384h-21.334zM192 463.746v-384h21.334v384h-21.334z"
                         fill="grey"></path>
                 </svg>
-                <a href="/playlist" class='label'>Your Library</a>
+                <a href="{% url 'your_playlists' %}" class='label'>Your Library</a>
             </div>
 
             <!-- brk change -->
@@ -116,7 +116,7 @@
                     </svg>
                 </div>
                 <span class='username hide-onhover'>{{ request.user }}</span>
-                <span class='logout username'>Logout</span>
+                <span class='logout username'><a href="{% url 'logout' %}">Logout</a></span>
             </button>
 
 
