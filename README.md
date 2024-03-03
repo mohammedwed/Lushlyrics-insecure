@@ -1,5 +1,8 @@
-
-
+# Project Overview
+### LogIn Page
+![LogIn Page](https://github.com/SuhelKhanCA/lushlyrics-webapp-django/assets/112371384/be85b904-e404-45ed-af29-eb52fd7d9bbe)
+### Sign Up Page
+![SignUp Page)](https://github.com/SuhelKhanCA/lushlyrics-webapp-django/assets/112371384/0d7107ee-0a3b-41c9-9b10-b307dbfe23f4)
 
 ## Setup
 
