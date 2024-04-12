@@ -1,4 +1,16 @@
+asgiref==3.8.1
+beautifulsoup4==4.12.3
+certifi==2024.2.2
+charset-normalizer==3.3.2
 Django==3.0.7
-youtube-search==1.1.1
+django-bootstrap-v5==1.0.11
+idna==3.7
+python-dotenv==1.0.1
+pytz==2024.1
+requests==2.31.0
+six==1.16.0
+soupsieve==2.5
 spotipy==2.16.1
+sqlparse==0.4.4
+urllib3==2.2.1
 youtube-search==1.1.1

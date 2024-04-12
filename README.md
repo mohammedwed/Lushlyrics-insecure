@@ -1,33 +1,21 @@
+# Django Authentication Approach
 
+In my project, I utilized Django's built-in authentication system to handle user authentication, registration, and password recovery functionalities. Below, I outline the key components of my approach:
 
+## Use of Built-in Authentication Methods
 
-## Setup
+Django provides a robust authentication system out-of-the-box, which includes functionalities such as user authentication, user registration, password management, etc. I leveraged these built-in methods to handle user authentication in my project. This allowed me to quickly implement secure authentication features without needing to reinvent the wheel.
 
-The first thing to do is to clone the repository:
+## Customization through Method Overriding
 
-```sh
-$ git clone https://github.com/mohammedwed/Lushlyrics-insecure.git
-$ cd lushlyrics-webapp-django
-```
+While Django's authentication system is powerful, I needed to customize certain aspects to align with the specific requirements of my project. To achieve this, I utilized method overriding to customize the behavior of certain authentication-related views and functionalities. For example, I customized the login and registration pages by overriding the default templates provided by Django, allowing me to apply custom styling using Bootstrap.
 
-Create a virtual environment to install dependencies in and activate it:
+## Styling with Bootstrap
 
-```sh
-$ virtualenv2 --no-site-packages env
-$ source env/bin/activate
-```
+To enhance the visual appeal and user experience of the authentication pages, I integrated Bootstrap, a popular front-end framework, to apply responsive and modern styling. By incorporating Bootstrap into the project, I was able to create visually appealing login, registration, and password recovery pages that are both user-friendly and aesthetically pleasing.
 
-Then install the dependencies:
+## Password Recovery Techniques
 
-```sh
-(env)$ pip install -r requirements.txt
-```
-Note the `(env)` in front of the prompt. This indicates that this terminal
-session operates in a virtual environment set up by `virtualenv2`.
+In addition to standard authentication features, I implemented password recovery techniques to assist users who forget their passwords. Django provides built-in password reset functionality, which I integrated into my project. Users can request a password reset link via email, and upon verification, they can set a new password securely.
 
-Once `pip` has finished downloading the dependencies:
-```sh
-(env)$ cd Lushlyrics-insecure
-(env)$ python manage.py runserver
-```
-And navigate to `http://127.0.0.1:8000/`.
+Overall, my approach to dealing with Django authentication functionality involved leveraging the built-in authentication methods, customizing certain aspects through method overriding, styling the authentication pages with Bootstrap, and implementing password recovery techniques to enhance user experience and security.

@@ -1,0 +1,26 @@
+{% extends 'users/base.html' %} {% load bootstrap5 %} {% block content %}
+
+<div class="container mt-3">
+  <form class="login_form" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <span class="label signup-title center-align"
+      >Sign up for free to start listening.</span
+    >
+
+    <div class="row">
+      {% for field in form %}
+      <div class="col-12 form-group">{% bootstrap_field field %}</div>
+      {% endfor %}
+    </div>
+
+    <button class="btn btn_log_in" type="submit">Sign up</button>
+    <div class="divider"></div>
+    <p class="label center-align mb-5">
+      Already have an account? <a href="/login">Log in</a>.
+    </p>
+  </form>
+</div>
+
+<script></script>
+{% endblock content %}
