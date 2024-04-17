@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="{% static 'js/tailwind.js' %}"></script>
+    <script src="{% static 'js/htmx.js' %}"></script>
+    <title>{% block title %}{% endblock title %}</title>
+  </head>
+  <body class="dark:bg-black">
+    <div class="flex flex-row justify-between h-[80px]">
+      <div class="m-[28px]">
+        <p class="text-3xl font-bold text-blue-600 dark:text-white">
+          LushLyrics
+        </p>
+      </div>
+
+      <div class="flex flex-row mx-[60px] gap-5" hx-boost="true">
+
+        {% if request.path == "/accounts/signup" %}
+        <p class="mt-[35px] text-gray-400 dark:text-white">
+          Already have an Account?
+        </p>
+
+        <p
+          class="mt-[28px] h-[40px] w-[120px] border-2 border-blue-600 rounded-full text-blue-600 font-bold text-center dark:text-white dark:border-white hover:border-0"
+        >
+          <a href="{% url "login" %}" class="align-middle"> SIGN IN</a>
+        </p>
+
+       {% elif request.path == "/accounts/login" %}
+
+       <p class="mt-[35px] text-gray-400 dark:text-white">
+        Dont have an Account?
+      </p>
+
+      <p
+        class="mt-[28px] h-[40px] w-[120px] border-2 border-blue-600 rounded-full text-blue-600 font-bold text-center dark:text-white dark:border-white hover:border-0"
+      >
+        <a href="{% url "signup" %}" class="align-middle"> SIGN UP</a>
+      </p>
+
+
+        {% elif request.path == "/accounts/reset/password" or request.path == "/accounts/new/password" %}
+
+        <p class="mt-[35px] text-gray-400 dark:text-white">
+          Go back to
+        </p>
+  
+        <p
+          class="mt-[28px] h-[40px] w-[120px] border-2 border-blue-600 rounded-full text-blue-600 font-bold text-center dark:text-white dark:border-white hover:border-0"
+        >
+          <a href="{% url "login" %}" class="align-middle"> LOGIN</a>
+        </p>
+        
+        
+        
+        
+        {% endif %}
+      </div>
+    </div>
+
+    {% block content %}
+    
+    
+    
+    {% endblock content %}
+
+
+
+  </body>
+</html>

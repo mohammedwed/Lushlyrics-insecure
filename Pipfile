@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+youtube-search = "==1.1.1"
+spotipy = "==2.16.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
