@@ -1,0 +1,85 @@
+body {
+    padding: 0;
+    height: 100%;
+    background-color:  #111111;
+    font-family: sans-serif;
+}
+
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    background-color: #0a0a0a;
+    width: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 32px 0;
+    padding: 4rem 0;
+    border-radius: 2rem;
+}
+
+#login-form div {
+    margin: 0 auto;
+    width: 65%;
+}
+
+#login-form-header {
+    text-align: center;
+    color: whitesmoke;
+}
+
+#login-form span {
+    text-align: center;
+}
+
+.user-form {
+    color: white;
+}
+
+.form-button input {
+    display: block;
+    padding: 1rem;
+    background-color: #1ed760;
+    border-radius: 4rem;
+    border: #1ed760 solid 1px;
+    width: 100%;
+    margin: 20px 0 32px 0;
+}
+
+.form-control {
+    display: block;
+    background-color: #121212;
+    margin: 15px 0;
+    border: whitesmoke solid 1px;
+}
+
+.user-form input[type="text"], .user-form input[type="password"] {
+    color : whitesmoke;
+}
+
+.form-control:hover {
+    border: white solid 2px;
+}
+
+.form-control::placeholder {
+    color: whitesmoke;
+}
+
+.forgot-password a {
+    color: white;
+}
+
+.form-error {
+    color: #1ed760;
+}
+
+.forgot-password a:hover{
+    color: #1ed760;
+}
+
+span {
+    color: whitesmoke;
+    padding-top: 1rem;
+}

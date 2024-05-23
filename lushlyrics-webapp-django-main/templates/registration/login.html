@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'login.css' %}?{% now 'U' %}">
+    {% endblock %}
+</head>
+<body>
+    <div id="login-form">
+        <div id="login-form-header">
+            <h1>Sign-In</h1>
+        </div>
+        {% if form.errors or form.non_field_errors %}
+            <div class="form-error">
+                {% for fields in form %}
+                    {{ fields.errors }}
+                {% endfor %}
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        <span class="forgot-password"><a href="{% url 'user:signup' %}">Create an account</a></span>
+        <div id="form">
+            <form class="form" action="{% url 'user:login' %}" method="post">
+                {% csrf_token %}
+                <div class="user-form">
+                    <label>Username</label>
+                    {{ form.username }}
+                </div>
+                <div class="user-form">
+                    <label>Password</label>
+                    {{ form.password }}
+                </div>
+
+                <div class="form-button">
+                    <input type="submit" value="Log-in">
+                </div>
+            </form>
+        </div>
+        <span class="forgot-password"><a href="{% url 'user:forgot-password' %}">Forgot your Password?</a></span>
+    </div>
+</body>
+</html>
