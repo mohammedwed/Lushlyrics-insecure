@@ -1,0 +1,94 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://cdn.discordapp.com/icons/715958380556058684/773d6583cd1d7aef41e701783d353aef.webp?size=128" type="image/x-icon">
+    <meta name="description" itemprop="description"
+        content="Play your playlists and favourites tracks, albums, and artists" />
+    <meta name="keywords"
+        content="convert, convert playlists, transfer, syncing, smart links, free, apple music, streaming services" />
+    <link rel="stylesheet" href="{% static "formStyle.css" %}">
+    <title>Youttify</title>
+</head>
+<script>
+    function checkPassword(form) {
+        const confirm_password = document.getElementById("cpwd");
+        var password = document.getElementById("pwd").value;
+        console.log(password)
+        if (password != confirm_password.value) {
+            confirm_password.setCustomValidity("Password did not match");
+        } else {
+            confirm_password.setCustomValidity("");
+        }
+    }
+</script>
+
+<body>
+
+
+    <div class="signup_header">
+        <a href="" target="_blank">
+        </a>
+    </div>
+
+    <div class="signup_body">
+        <form class="login_form" method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <span class='label signup-title center-align'>Sign up for free to start listening.</span>
+            <label for="sign-up-username" class="label">
+                What's your name?
+                {% if form.username.errors %}
+                    <span style="color:#f79862;">{{ form.username.errors.0 }}</span>
+                {% endif %}
+            </label>
+            <input type="text" class="form_input" name="username" pattern="[A-Za-z]+" placeholder="Enter your name." required>
+
+            <label for="sign-up-email" class="label">
+                What's your email?
+                {% if form.email.errors %}
+                    <span style="color:#f79862;">{{ form.email.errors.0 }}</span>
+                {% endif %}
+            </label>
+            <input type="email" class="form_input" name="email" placeholder="Enter your email." required>
+
+            <label for="sign-up-pwd" class="label">
+                Create a password
+                {% if form.password.errors %}
+                    <span style="color:#f79862;">{{ form.password.errors.0 }}</span>
+                {% endif %}
+            </label>
+            <input type="password" class="form_input" id="pwd" name="password" placeholder="Create a password." required>
+
+            <label for="sign-up-cpwd" class="label">
+                Confirm your password
+                {% if form.password_confirm.errors %}
+                    <span style="color:#f79862;">{{ form.password_confirm.errors.0 }}</span>
+                {% endif %}
+            </label>
+            <input type="password" class="form_input" id="cpwd" name="password_confirm" oninput="checkPassword(this)" placeholder="Re-type your password" required>
+
+            <button class='btn btn_log_in' type="submit">Sign up</button>
+            <div class="divider"></div>
+            <p class='label center-align'>Already have an account? <a href="{% url 'user:login' %}">Log in</a>.</p>
+        </form>
+    </div>
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("pwd").value;
+            const confirmPassword = document.getElementById("cpwd").value;
+            const confirmPasswordField = document.getElementById("cpwd");
+    
+            if (password !== confirmPassword) {
+                confirmPasswordField.setCustomValidity("Passwords do not match");
+            } else {
+                confirmPasswordField.setCustomValidity("");
+            }
+        }
+    </script>
+
+</body>
+
+</html>
