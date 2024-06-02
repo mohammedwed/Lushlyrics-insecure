@@ -1,5 +1,6 @@
-from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
+import json
+from spotipy.oauth2 import SpotifyClientCredentials
 from youtube_search import YoutubeSearch
 
 PLAYLISTS = [['Accidental','https://open.spotify.com/playlist/0zJ8hC8YJOcHYuk5nMPFm8?si=U6Kyom3XQ32reSuVgl2uhA', "PL59eqqQABruMQOPlUVcVsIid685ZdwDjf"],
@@ -42,4 +43,4 @@ for playlist in PLAYLISTS:
 
 import json
 
-json.dump(CONTAINER,open('card.json', 'w'),indent = 6) 
+json.dump(CONTAINER, open('card.json', 'w'), indent = 6) 
