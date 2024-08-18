@@ -1,0 +1,87 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon"
+        href="https://cdn.discordapp.com/icons/715958380556058684/773d6583cd1d7aef41e701783d353aef.webp?size=128"
+        type="image/x-icon">
+    <meta name="description" itemprop="description"
+        content="Play your playlists and favourites tracks, albums, and artists" />
+    <meta name="keywords"
+        content="convert, convert playlists, transfer, syncing, smart links, free, apple music, streaming services" />
+    <link rel="stylesheet" href="{% static 'css/formStyle.css' %}">
+    <link rel="stylesheet" href="{% static 'css/messages.css' %}">
+    <title>Youttify</title>
+    
+</head>
+<script>
+    function checkPassword(form) {
+        const confirm_password = document.getElementById('cpwd');
+        const password = document.getElementById('pwd').value;
+        if (password !== confirm_password.value) {
+            confirm_password.setCustomValidity('Passwords do not match');
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+</script>
+
+<body>
+    <div class="signup_header">
+        <a href="" target="_blank"></a>
+    </div>
+    <div class="signup_body">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <form class="login_form" method="POST" action='{% url "accounts:user-signup" %}' enctype="multipart/form-data">
+            {% comment %} <span class="label signup-title center-align">Sign up for free to start listening.</span> {% endcomment %}
+            <h3 class="header-text">Youttify | Sign up for free :)</h3>
+            {% csrf_token %}
+            <label for="id_username" class="label">What's your name?</label>
+            <input type="text" class="form_input" name="username" id="id_username"
+                value="{{ form.username.value|default_if_none:'' }}" placeholder="Enter your name." required>
+            {% for error in form.username.errors %}
+            <div class="error">{{ error }}</div>
+            {% endfor %}
+
+            <label for="id_email" class="label">What's your email?</label>
+            <input type="email" class="form_input" name="email" id="id_email"
+                value="{{ form.email.value|default_if_none:'' }}" placeholder="Enter your email." required>
+            {% for error in form.email.errors %}
+            <div class="error">{{ error }}</div>
+            {% endfor %}
+
+            <label for="id_password" class="label">Create a password</label>
+            <input type="password" class="form_input" id="pwd" name="password1" placeholder="Create a password."
+                required>
+            {% for error in form.password1.errors %}
+            <div class="error">{{ error }}</div>
+            {% endfor %}
+
+            <label for="id_password_confirm" class="label">Confirm your password</label>
+            <input type="password" class="form_input" id="cpwd" name="password2" oninput="checkPassword(this)"
+                placeholder="Re-type your password" required>
+            {% for error in form.password2.errors %}
+            <div class="error">{{ error }}</div>
+            {% endfor %}
+
+            {% if form.non_field_errors %}
+            <div class="error">{{ form.non_field_errors }}</div>
+            {% endif %}
+
+            <button class="btn btn_log_in" type="submit">Sign up</button>
+            <div class="divider"></div>
+            <p class="label center-align">Already have an account? <a href="{% url 'accounts:user-login' %}">Log in</a>.
+            </p>
+        </form>
+    </div>
+</body>
+
+</html>

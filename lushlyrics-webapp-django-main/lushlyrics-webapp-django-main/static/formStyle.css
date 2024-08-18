@@ -1,0 +1,153 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Circular, Helvetica Neue, Helvetica, Arial, sans-serif;
+  color: #222326;
+  font-weight: 400;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 20px 0;
+margin: 20px 0;
+}
+
+.signup_header {
+  height: 10vw;
+  min-height: 60px;
+  max-height: 108px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #d9dadc;
+  margin-bottom: 20px;
+
+}
+
+.signup_header img {
+  height: 80%;
+  max-width: 200px;
+  min-height: 40px;
+  transform: translateX(-8px);
+}
+
+/* .signup_body{
+
+} */
+.login_form {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  /* max-width: 450px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: 700;
+  padding-bottom: 5px;
+  margin-left: 1px;
+  color: #444445;
+  font-weight: 200;
+}
+
+input {
+  font-family: inherit;
+  display: block;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #222326;
+  height: 40px;
+  padding: 0 12px;
+  background-color: #fff;
+  border: 1px solid #d9dadc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #919496;
+  outline: none;
+}
+
+.btn {
+  font-size: 14px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #1db954;
+  border-color: #1db954;
+  color: white;
+}
+
+.btn_log_in {
+  background: #15883e;
+  color: white;
+  border: 2px solid #15883e;
+}
+
+.btn_log_in:hover {
+  background: #1db954;
+  border: 2px solid #1db954;
+}
+
+.btn_sign_up {
+  text-align: center;
+  background: white;
+  color: #616467;
+  border: 2px solid #616467;
+  text-decoration: none;
+}
+
+.btn_sign_up:hover {
+  background: #616467;
+  color: white;
+}
+
+.center-align {
+  text-align: center;
+}
+
+.divider {
+  height: 1px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #d9dadc;
+}
+
+.signup-title {
+  font-size: 25px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 100;
+}
+
+.error {
+  color: #f79862;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
