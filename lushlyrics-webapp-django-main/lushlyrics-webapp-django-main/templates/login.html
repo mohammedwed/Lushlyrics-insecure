@@ -1,0 +1,77 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon"
+        href="https://cdn.discordapp.com/icons/715958380556058684/773d6583cd1d7aef41e701783d353aef.webp?size=128"
+        type="image/x-icon">
+    <meta name="description" itemprop="description"
+        content="Play your playlists and favourites tracks, albums, and artists " />
+    <meta name="keywords"
+        content="convert, convert playlists, transfer, syncing, smart links, free, apple music, streaming services" />
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/formStyle.css' %}">
+    <link rel="stylesheet" href="{% static 'css/messages.css' %}">
+    {% endblock %}
+    <title>Youttify</title>
+</head>
+
+<body>
+    <div class="signup_header">
+        <a href="" target="_blank">
+
+        </a>
+    </div>
+    </a>
+    <div class="signup_body">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <form class="login_form" method='POST' enctype="multipart/form-data">
+            <h3 class="header-text">Youttify | Log in</h3>
+            {% csrf_token %}
+            <label for="login-username" class="label">
+                {{form.username.label}}
+            </label>
+
+            <input type="text" class="form_input" pattern="[A-Za-z0-9.@_-e]+" name="username"
+                value='{{form.username.value|default_if_none:""}}' placeholder="Email address or username" required>
+            <label for="login-username" class="label">
+                {{form.password.label}}
+            </label>
+            <input type="password" class="form_input" name="password" placeholder="Password" required>
+            {% for error in form.password.errors %}
+            <div class="error">{{ error }}</div>
+            {% endfor %}
+            {% if form.non_field_errors %}
+            <div class="error">
+                {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <button class='btn btn_log_in' type="submit">Log in</button>
+            <div class="divider"></div>
+            <a href="{% url 'accounts:password-reset' %}" class='cta-btn'>Forgot Username/Password?</a>
+            <div class="divider"></div>
+            <p class='label center-align'
+                style="padding: 0 0 13px 0; margin: 0 0 5px 0; font-size: 13px; letter-spacing: .5px;">If You don't have
+                an account?</p>
+            <a class='btn btn_sign_up' href="{% url 'accounts:user-signup' %}">Sign Up for Lushlyrics</a>
+        </form>
+    </div>
+
+    <!-- <div class="signin_body">
+
+        </div> -->
+
+</body>
+</body>
+
+</html>
