@@ -1,0 +1,45 @@
+{% extends 'base_form.html' %}
+{% block headscript %}
+<script>
+    function checkPassword(form) {
+        const confirm_password = document.getElementById("cpwd");
+        var password = document.getElementById("pwd").value;
+        console.log(password)
+        if (password != confirm_password.value) {
+            confirm_password.setCustomValidity("Password did not match");
+        } else {
+            confirm_password.setCustomValidity("");
+        }
+    }
+</script>
+{% endblock %}
+{% block body %}
+<div class="signup_header">
+    <a href="" target="_blank"></a>
+</div>
+</a>
+<div class="signup_body">
+    <form class="login_form" method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="login-username" class="label">
+            Email address or username
+        </label>
+
+        <input type="text" class="form_input" pattern="[A-Za-z0-9.@_-e]+" name="username" placeholder="Email address or username" required>
+        <label for="login-username" class="label">
+            Password
+        </label>
+        <input type="password" class="form_input" name="password" placeholder="Password" required>
+        {% if not case %}
+        <span style="color:#f79862;
+            padding-bottom:20px;
+            text-align:center;">Username or password invalid</span>
+        {% endif %}
+        <button class='btn btn_log_in' type="submit">Log in</button>
+        <div class="divider"></div>
+        <a href="{% url 'account:reset_password' %}"><i>Forgot Password?</i></a>
+        <p class='label center-align'>Don't have an account?</p>
+        <a class='btn btn_sign_up' href="/account/signup">Sign Up for Lushlyrics</a>
+    </form>
+</div>
+{% endblock %}
