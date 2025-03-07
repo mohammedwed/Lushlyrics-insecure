@@ -1,0 +1,130 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification (Enhanced)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ZenhBwPWqAZlvtSVkRoxhurbQ6+1Lwj4s2UXnpre3hwHbaHWQcwlNLCvMNDrPdkf" crossorigin="anonymous">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url("https://www.istockphoto.com/photos/mountain-range");
+            /* Replace with your desired background image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            /* Semi-transparent white background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.5s ease-in-out forwards;
+            /* Slide-in animation */
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .otp-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out forwards;
+            /* Fade-in animation */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Improved button styles */
+        .btn-primary {
+            background-color: #388e3c;
+            /* Adjust base color as desired */
+            border-color: #388e3c;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            /* Add smooth transitions */
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #2e7d31;
+            /* Adjust hover color as desired */
+        }
+
+        .btn-primary:active {
+            transform: translateY(2px);
+            /* Add subtle press effect */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Verify Your Email</h1>
+            <p>Enter your email address and we'll send you a one-time code (OTP) for verification.</p>
+            <form class="password_reset_form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="emailInput" class="form-label">Email Address</label>
+                    {% if is_email_exists %}
+                    <span style="color:#ff4726;">Email Does Not Exist!</span>
+                    {% endif %}
+                    <input value="{{ email }}" type="email" class="form-control" id="emailInput" name="email"
+                        aria-describedby="emailHelp" required>
+
+                    <div></div>
+                </div>
+                <button class="btn btn-primary" type="submit">Send OTP</button>
+                {% if email %}
+                <div>
+                    <div class="mb-3 mt-3">
+                        <label for="otpInput" class="form-label">Enter OTP</label>
+                        <input name="otp" type="text" class="form-control" maxlength="6" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                {% endif %}
+            </form>
+
+
+        </div>
+    </div>
+</body>
+
+</html>
