@@ -1,0 +1,56 @@
+{% load static %}
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="https://cdn.discordapp.com/icons/715958380556058684/773d6583cd1d7aef41e701783d353aef.webp?size=128" type="image/x-icon">
+	<meta name="description" itemprop="description" content="Play your playlists and favourite tracks, albums, and artists" />
+	<meta name="keywords" content="convert, convert playlists, transfer, syncing, smart links, free, apple music, streaming services" />
+	<link rel="stylesheet" href="{% static 'formStyle.css' %}">
+	<title>Login | Youttify</title>
+</head>
+
+<body>
+	<div class="signup_header">
+		<a href="/" target="_blank">
+			<!-- Logo or homepage link -->
+		</a>
+	</div>
+
+	<div class="signup_body">
+		<form class="login_form" method="POST">
+			{% csrf_token %}
+
+			<span class="label signup-title center-align" style="font-size: 1.8rem; font-weight: bold;">Welcome back!</span>
+			<p class="label center-align" style="margin-bottom: 30px;">Log in to continue enjoying your music journey.</p>
+
+			<label for="login-username" class="label">
+				Email address or Username
+			</label>
+			<input type="text" class="form_input" name="username" placeholder="Email address or username" required>
+
+			<label for="login-password" class="label">
+				Password
+			</label>
+			<input type="password" class="form_input" name="password" placeholder="Password" required>
+
+			{% if invalid_login %}
+				<span style="color:#f79862; padding-top:10px; padding-bottom:20px; display:block; text-align:center;">Incorrect username or password. Please try again.</span>
+			{% endif %}
+
+			<div style="text-align: right; margin-top: 10px; margin-bottom: 20px;">
+				<p class="label center-align"><a href="/forgot-password">Forgot your password?</a></p>
+			</div>
+
+			<button class="btn btn_log_in" type="submit">Log in</button>
+
+			<div class="divider"></div>
+
+			<p class="label center-align">Don't have an account yet?</p>
+			<a class="btn btn_sign_up" href="/register">Sign Up for Youttify</a>
+		</form>
+	</div>
+</body>
+
+</html>
