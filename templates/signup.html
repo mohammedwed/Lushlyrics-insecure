@@ -1,0 +1,302 @@
+{% load static %}
+{% load form_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | Lushlyrics</title>
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="https://cdn.discordapp.com/icons/715958380556058684/773d6583cd1d7aef41e701783d353aef.webp?size=128"
+    type="image/x-icon" />
+
+  <!-- Meta -->
+  <meta name="description" content="Sign up for your Lushlyrics account to enjoy Spotify-style playlists." />
+  <meta name="keywords" content="spotify, lushlyrics, playlist, music, signup, streaming" />
+
+  <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'formStyle.css' %}" />
+
+  <style>
+    body {
+      background: #121212;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 20px 0;
+      margin: 0;
+    }
+
+    .signup-container {
+        background: #181818;
+        padding: 30px 20px;  
+        border-radius: 12px;
+        width: 100%;
+        max-width: 360px;
+        box-sizing: border-box;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+        text-align: center;
+        margin: 20px auto;
+    }
+
+    .signup-logo {
+      margin-bottom: 20px;
+    }
+
+    .signup-logo img {
+      height: 50px;
+    }
+
+
+    .signup-header-text {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+        color: #fff;
+        text-align: center; 
+        user-select: none;
+        }
+
+    .signup-subtitle {
+        font-size: 1rem;
+        color: #b3b3b3;
+        margin-bottom: 28px;
+        text-align: center; 
+        user-select: none;
+        line-height: 1.4;
+        font-weight: 500;
+    }
+
+    form {
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #b3b3b3;
+      font-size: 0.95rem;
+      user-select: none;
+    }
+
+    .input-icon-wrapper {
+      position: relative;
+    }
+
+    .form_group_icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #1db954;
+      font-size: 18px;
+      pointer-events: none;
+    }
+
+    input.form_input {
+      width: 100%;
+      padding: 12px 12px 12px 42px;
+      border-radius: 6px;
+      border: none;
+      background: #282828;
+      color: white;
+      font-size: 1rem;
+      box-sizing: border-box;
+      height: 44px;
+      transition: background-color 0.3s ease;
+    }
+
+    input.form_input::placeholder {
+      color: #666;
+    }
+
+    input.form_input:focus {
+      background-color: #333333;
+      outline: none;
+    }
+
+    button.btn_sign_up {
+      background-color: #1db954;
+      border: none;
+      color: white;
+      padding: 14px;
+      border-radius: 6px;
+      width: 100%;
+      font-size: 1.15rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    button.btn_sign_up:hover {
+      background-color: #1ed760;
+    }
+
+    .errorlist {
+      color: #f79862;
+      font-size: 0.9rem;
+      margin-top: 6px;
+      margin-bottom: -12px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .login-link {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 0.95rem;
+      user-select: none;
+    }
+
+    .login-link a {
+      color: #1db954;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #aaa;
+      font-size: 18px;
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="signup-container">
+    <div class="signup-logo">
+      <img src="{% static 'Spotify_Primary_Logo_RGB_Green.png' %}" alt="Lushlyrics Logo" />
+    </div>
+
+    <!-- Added welcoming header and subtitle -->
+    <div class="signup-header-text">Sign up to start listening.</div>
+    <div class="signup-subtitle">Create your free account and enjoy personalized playlists instantly.</div>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+      <ul class="errorlist">
+        {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      <div class="form-group">
+        {{ form.username.label_tag }}
+        <div class="input-icon-wrapper">
+          <i class="fa fa-user form_group_icon"></i>
+          {{ form.username|add_class:"form_input" }}
+        </div>
+        {% if form.username.errors %}
+        <ul class="errorlist">
+          {% for error in form.username.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{ form.email.label_tag }}
+        <div class="input-icon-wrapper">
+          <i class="fa fa-envelope form_group_icon"></i>
+          {{ form.email|add_class:"form_input" }}
+        </div>
+        {% if form.email.errors %}
+        <ul class="errorlist">
+          {% for error in form.email.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{ form.password1.label_tag }}
+        <div class="input-icon-wrapper">
+          <i class="fa fa-lock form_group_icon"></i>
+          {{ form.password1|add_class:"form_input" }}
+          <span class="toggle-password" onclick="togglePassword('id_password1', this)">
+            <i class="fa fa-eye-slash"></i>
+          </span>
+        </div>
+        {% if form.password1.errors %}
+        <ul class="errorlist">
+          {% for error in form.password1.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{ form.password2.label_tag }}
+        <div class="input-icon-wrapper">
+          <i class="fa fa-lock form_group_icon"></i>
+          {{ form.password2|add_class:"form_input" }}
+          <span class="toggle-password" onclick="togglePassword('id_password2', this)">
+            <i class="fa fa-eye-slash"></i>
+          </span>
+        </div>
+        {% if form.password2.errors %}
+        <ul class="errorlist">
+          {% for error in form.password2.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+
+      <button type="submit" class="btn_sign_up">Sign Up</button>
+    </form>
+
+    <div class="login-link">
+      <p>Already have an account? <a href="/login">Log In to Lushlyrics</a></p>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword(fieldId, iconSpan) {
+      const field = document.getElementById(fieldId);
+      const icon = iconSpan.querySelector('i');
+      if (field.type === 'password') {
+        field.type = 'text';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      } else {
+        field.type = 'password';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      }
+    }
+  </script>
+</body>
+
+</html>

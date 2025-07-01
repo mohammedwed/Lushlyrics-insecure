@@ -1,0 +1,206 @@
+{% load static %}
+{% load form_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Lushlyrics</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn.discordapp.com/icons/715958380556058684/773d6583cd1d7aef41e701783d353aef.webp?size=128" type="image/x-icon" />
+
+    <!-- Meta -->
+    <meta name="description" content="Log in to your Lushlyrics account to enjoy Spotify-style playlists." />
+    <meta name="keywords" content="spotify, lushlyrics, playlist, music, login, streaming" />
+
+    <!-- Font Awesome for icons -->
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'formStyle.css' %}" />
+
+    <style>
+        body {
+            background: #121212;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background: #181818;
+            padding: 40px;
+            border-radius: 12px;
+            width: 320px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        .login-logo {
+            margin-bottom: 20px;
+        }
+
+        .login-logo img {
+            height: 50px;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .form_group_icon {
+            position: absolute;
+            top: 50%;
+            left: 12px;
+            transform: translateY(-50%);
+            color: #1db954;
+            font-size: 16px;
+            height: 44px; 
+            line-height: 44px; 
+        }
+
+        input.form_input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;  
+            border-radius: 6px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            background: #282828;
+            color: white;
+            height: 44px; 
+            box-sizing: border-box;
+        }
+
+        input.form_input::placeholder {
+            color: #b3b3b3;
+        }
+
+        button.btn_log_in {
+            background-color: #1db954;
+            border: none;
+            color: white;
+            padding: 12px;
+            border-radius: 6px;
+            width: 100%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button.btn_log_in:hover {
+            background-color: #1ed760;
+        }
+
+        .errorlist {
+            color: #f79862;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            padding-left: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        .signup-link {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .signup-link a {
+            color: #1db954;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #aaa;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-logo">
+            <img src="{% static 'Spotify_Primary_Logo_RGB_Green.png' %}" alt="Lushlyrics Logo" />
+        </div>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+            <ul class="errorlist">
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <div class="form-group">
+                <i class="fa fa-user form_group_icon"></i>
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                <i class="fa fa-lock form_group_icon"></i>
+                {{ form.password }}
+                <span class="toggle-password" onclick="togglePassword('id_password', this)">
+                    <i class="fa fa-eye-slash"></i>
+                </span>
+            </div>
+
+            <button type="submit" class="btn_log_in">Log In</button>
+        </form>
+
+        <div class="signup-link">
+            <a href="{% url 'password_reset' %}">Forgot your password?</a>
+        </div>
+          
+        <div class="signup-link">
+            <p>Don't have an account? <a href="/signup">Sign Up for Lushlyrics</a></p>
+        </div>
+    </div>
+
+
+    <script>
+        function togglePassword(fieldId, iconSpan) {
+            const field = document.getElementById(fieldId);
+            const icon = iconSpan.querySelector('i');
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                field.type = 'password';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        }
+        </script>
+        
+</body>
+
+</html>
