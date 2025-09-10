@@ -1,8 +1,29 @@
+# Python virtual environment
 venv/
+
+# Bytecode and cache
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+
+# SQLite database
 *.sqlite3
+
+# Logs
 *.log
-*.env
+
+# Environment variables
+.env
+.env.*
+
+# Django static and media files (optional if generated dynamically)
+staticfiles/
+media/
+
+# IDE/editor configs
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db

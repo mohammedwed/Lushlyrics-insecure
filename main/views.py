@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from youtube_search import YoutubeSearch
@@ -55,16 +56,55 @@ def login_view(request):
     Renders login form and handles authentication.
     Redirects to 'next' page after login.
     """
+    error = None
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '').strip()
         user = authenticate(request, username=username, password=password)
-        if user:
+
+        if user is not None:
             login(request, user)
-            return redirect(request.GET.get('next', '/'))
+            next_url = request.GET.get('next') or request.POST.get('next') or '/'
+            if url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}, require_https=request.is_secure()):
+                return redirect(next_url)
+            return redirect('/')
         else:
-            return render(request, 'login.html', {'error': 'Invalid credentials'})
-    return render(request, 'login.html')
+            error = 'Invalid username or password.'
+
+    return render(request, 'login.html', {
+        'error': error,
+        'next': request.GET.get('next', '/')
+    })
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.conf import settings
+
+def login_view(request):
+    """
+    Renders login form and handles authentication.
+    Redirects to 'next' page after login.
+    """
+    error = None
+    if request.method == 'POST':
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '').strip()
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            next_url = request.GET.get('next') or request.POST.get('next') or '/'
+            if url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}, require_https=request.is_secure()):
+                return redirect(next_url)
+            return redirect('/')
+        else:
+            error = 'Invalid username or password.'
+
+    return render(request, 'login.html', {
+        'error': error,
+        'next': request.GET.get('next', '/')
+    })
+
 
 # ─── LOGOUT VIEW ────────────────────────────────────────────────────────────
 @login_required
