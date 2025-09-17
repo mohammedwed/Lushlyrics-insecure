@@ -1,0 +1,165 @@
+/* PLAYLIST BANNER */
+.playlist__banner {
+  display: flex;
+  color: #fff;
+  height: 280px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.5)), rgb(70, 62, 118);
+  transition: background 0.5s ease;
+}
+
+/* NAVBAR */
+.navbar {
+  background: rgb(70, 62, 118);
+  transition: background 0.3s ease;
+}
+
+/* PLAYLIST IMAGE */
+.playlist__img {
+  object-fit: contain;
+  height: 232px;
+  margin: 30px;
+  transition: transform 0.3s ease;
+}
+.playlist__img:hover {
+  transform: scale(1.05);
+}
+
+/* PLAYLIST NAME */
+.playlist__name {
+  font-size: clamp(32px, 6vw, 72px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  transition: color 0.3s ease;
+}
+
+/* OPTION BAR */
+.playlist__optionbar {
+  width: 100%;
+  padding: 20px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), #121212), rgb(70, 62, 118);
+  transition: background 0.3s ease;
+}
+
+/* ANIMATED PLAY BUTTON */
+.playlist__play img {
+  width: 60px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.playlist__play img:hover {
+  transform: scale(1.2) rotate(5deg);
+  filter: drop-shadow(0 0 10px #1db954);
+}
+
+/* SONG ROW */
+.playlist__song {
+  display: flex;
+  width: auto;
+  height: 30px;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 5px;
+  align-items: center;
+  transition: background 0.2s ease-in, transform 0.2s ease-in;
+}
+.playlist__song:hover {
+  background: #272a2b;
+  transform: translateX(5px);
+}
+
+/* DELETE BUTTON */
+.delete {
+  margin-left: 20px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  background: transparent;
+  padding: 0;
+  border: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.2s ease-in-out, opacity 0.2s ease-in-out, background 0.3s ease;
+}
+.delete:focus {
+  outline: none;
+}
+.delete:hover {
+  background: #212324;
+}
+.playlist__song:hover .delete,
+.playlist__song:focus-within .delete {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* TEXT STYLES */
+.grey_text {
+  color: #b3b3b3;
+}
+.ellipsis_one_line {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.playlist__songTitle {
+  max-width: 30vw;
+  margin-left: 10px;
+}
+.playlist__albumimg {
+  object-fit: cover;
+  width: 40px;
+  height: 40px;
+}
+
+/* HEADER */
+.playlist__header {
+  display: flex;
+  width: auto;
+  height: auto;
+  padding: 20px;
+  margin-left: 20px;
+  align-items: center;
+}
+.playlist__headerTitle {
+  display: flex;
+  width: 50%;
+  align-items: center;
+}
+.playlist__headerAlbum {
+  width: 20%;
+  max-width: 10vw;
+}
+.playlist__headerDate {
+  width: 20%;
+  margin-left: 30px;
+  display: flex;
+  justify-content: center;
+}
+.playlist__headerDuration {
+  display: flex;
+  align-items: center;
+}
+.playlist__headerDuration img {
+  object-fit: contain;
+  width: 24px;
+  filter: invert(0.7);
+}
+
+/* DIVIDER */
+.divider {
+  width: 98%;
+  height: 1px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  background: #d9dadc;
+}
+
+/* HIDDEN ELEMENT */
+#song_name_delete {
+  display: none;
+}
