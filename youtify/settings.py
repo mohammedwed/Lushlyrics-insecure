@@ -11,13 +11,15 @@ ALLOWED_HOSTS = ['*'] if DEBUG else ['yourdomain.com']  # Replace with actual do
 
 # ─── APPLICATION CONFIGURATION ──────────────────────────────────────────────
 INSTALLED_APPS = [
+    'main',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main',  # Custom app
+    
 ]
 
 MIDDLEWARE = [
@@ -52,10 +54,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'youtify.wsgi.application'
 
 # ─── DATABASE CONFIGURATION ─────────────────────────────────────────────────
+import os
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(os.path.join(BASE_DIR, 'db.sqlite3')),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -76,8 +84,9 @@ USE_TZ = True
 
 # ─── STATIC & MEDIA FILES ───────────────────────────────────────────────────
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # For collectstatic in production
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # if using a custom static folder
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')    # for collectstatic
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

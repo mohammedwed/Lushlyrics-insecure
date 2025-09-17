@@ -7,7 +7,7 @@ __pycache__/
 *$py.class
 
 # SQLite database
-*.sqlite3
+db.sqlite3
 
 # Logs
 *.log

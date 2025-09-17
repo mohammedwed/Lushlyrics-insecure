@@ -7,6 +7,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from youtube_search import YoutubeSearch
+from django.http import JsonResponse
 from .models import playlist_user
 import json
 import os
@@ -215,3 +216,8 @@ from django.shortcuts import redirect
 def custom_logout(request):
     logout(request)
     return redirect('login')  # or use reverse('login')
+
+
+
+def api_home(request):
+    return JsonResponse({'message': 'API is working!'})
