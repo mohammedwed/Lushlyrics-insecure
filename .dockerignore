@@ -1,0 +1,48 @@
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.mo
+*.egg-info
+
+# Virtual environments
+env/
+venv/
+.venv/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Git and version control
+.git
+.gitignore
+
+# IDE / editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs and temp files
+*.log
+*.pot
+*.tmp
+*.swp
+.cache/
+coverage/
+
+# Django-specific
+media/           # user-uploaded files (handle via volumes in dev/prod)
+staticfiles/     # collected static files (collect in container or volume)
+db.sqlite3       # local dev DB
+
+# Node / frontend build artifacts (if applicable)
+node_modules/
+build/
+dist/
+
+# Docker-related
+Dockerfile
+docker-compose*.yml
