@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" itemprop="description"
+    content="Play your playlists and favourites tracks, albums, and artists " />
+    <meta name="keywords"
+    content="convert, convert playlists, transfer, syncing, smart links, free, apple music, streaming services" />
+    <title>Connexion - Lushlyrics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'spotify-green': '#1DB954',
+                        'spotify-green-hover': '#1ed760',
+                        'spotify-dark': '#191414',
+                        'spotify-gray': '#282828',
+                        'spotify-border': '#333333',
+                        'bg-main': '#121212',  // Noir plus lumineux
+                        'bg-card': '#181818',   // Gris très foncé pour les cartes
+                        'text-primary': '#ffffff',
+                        'text-secondary': '#b3b3b3'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for better Spotify-like appearance */
+        .spotify-input {
+            background-color: #282828;
+            border-color: #404040;
+            color: white;
+        }
+        .spotify-input:focus {
+            border-color: #1DB954;
+            box-shadow: 0 0 0 1px #1DB954;
+        }
+        .spotify-input::placeholder {
+            color: #b3b3b3;
+        }
+        .spotify-checkbox:checked {
+            background-color: #1DB954;
+            border-color: #1DB954;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-[#121212] flex items-center justify-center p-4">
+    <div class="w-full max-w-md space-y-8">
+        <!-- Logo and Brand -->
+        <div class="text-center space-y-4">
+            <h1 class="text-3xl font-bold text-white">Welcome to Lushlyrics</h1>
+            <p class="text-gray-400">Create your account</p>
+        </div>
+
+        <!-- Login Card -->
+        <div class="bg-[#181818] border border-gray-700 rounded-lg p-6 text-white">
+            <div class="space-y-1 mb-6">
+                <h2 class="text-2xl text-center font-semibold">Register</h2>
+            </div>
+            
+            <form class="space-y-4" method='POST' enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="space-y-2">
+                    <label for="username" class="block text-sm font-medium text-gray-300">Username</label>
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="your username"
+                        class="spotify-input w-full px-3 py-2 border rounded-md focus:outline-none transition-colors"
+                        required
+                    />
+                </div>
+
+                <div class="space-y-2">
+                    <label for="fullname" class="block text-sm font-medium text-gray-300">Full name</label>
+                    <input
+                        type="text"
+                        name="fullname"
+                        placeholder="your fullname"
+                        class="spotify-input w-full px-3 py-2 border rounded-md focus:outline-none transition-colors"
+                        required
+                    />
+                </div>
+
+                <div class="space-y-2">
+                    <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="vous@exemple.com"
+                        class="spotify-input w-full px-3 py-2 border rounded-md focus:outline-none transition-colors"
+                        required
+                    />
+                </div>
+                
+                <div class="space-y-2">
+                    <label for="password" class="block text-sm font-medium text-gray-300">Password</label>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="••••••••"
+                        class="spotify-input w-full px-3 py-2 border rounded-md focus:outline-none transition-colors"
+                        required
+                    />
+                </div>
+
+                 <div class="space-y-2">
+                    <label for="confirm_password" class="block text-sm font-medium text-gray-300">Confirm password</label>
+                    <input
+                        type="password"
+                        name="confirm_password"
+                        placeholder="••••••••"
+                        class="spotify-input w-full px-3 py-2 border rounded-md focus:outline-none transition-colors"
+                        required
+                    />
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <input
+                            type="checkbox"
+                            name="remember"
+                            class="spotify-checkbox w-4 h-4 text-[#1DB954] bg-gray-100 border-gray-300 rounded focus:ring-[#1DB954]"
+                        />
+                        <label for="remember" class="text-gray-300 text-sm">
+                            Remenber me
+                        </label>
+                    </div>
+                </div>
+
+                 {% if error %}
+                <p class="text-sm text-center text-red-500">{{ error }}</p>
+                {% endif %}
+                
+                <button
+                    type="submit"
+                    class="w-full bg-[#1DB954] hover:bg-[#1ed760] text-black font-semibold py-2 px-4 rounded-md transition-colors duration-200"
+                >
+                    Register
+                </button>
+            </form>
+            
+            <div class="mt-6 space-y-4">
+                <p class="text-center text-sm text-gray-400">
+                    You already have an account ?
+                    <a href="{% url 'login' %}" class="text-[#1DB954] hover:text-[#1ed760] transition-colors">
+                        Login
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-xs text-gray-400 space-y-2">
+            <p>© 2025 Lushlirisc. All rights reserved.</p>
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="hover:text-[#1DB954] transition-colors">Terms</a>
+                <a href="#" class="hover:text-[#1DB954] transition-colors">Privacy</a>
+                <a href="#" class="hover:text-[#1DB954] transition-colors">Help</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
