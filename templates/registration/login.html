@@ -1,0 +1,61 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://cdn.discordapp.com/icons/715958380556058684/773d6583cd1d7aef41e701783d353aef.webp?size=128" type="image/x-icon">
+    <meta name="description" itemprop="description"
+        content="Play your playlists and favourites tracks, albums, and artists " />
+    <meta name="keywords"
+        content="convert, convert playlists, transfer, syncing, smart links, free, apple music, streaming services" />
+    {% block css %}
+    <link rel="stylesheet" href="{% static "formStyle.css" %}">
+    {% endblock %}
+    <title>Lushlyrics | Log in</title>
+</head>
+
+<body>
+
+    <div class="signup_header">
+        <a href="" target="_blank">
+        </a>
+    </div>
+
+    <div class="signup_body">
+        <form class="login_form" method='POST' action="{% url 'login' %}">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div style="color: #f79862; padding-bottom:20px; text-align:center;">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <label for="{{ field.id_for_label }}" class="label">
+                    {{ field.label }}
+                    {% for error in field.errors %}
+                        <span style="color:#f79862; display: block;">{{ error }}</span>
+                    {% endfor %}
+                </label>
+                {{ field }}
+            {% endfor %}
+
+            <p class='label center-align' style="margin-top: 15px;">
+                <a href="{% url 'password_reset' %}" style="color: #57b7ff; font-size: 14px;">Forgot your password?</a>
+            </p>
+
+            <button class='btn btn_log_in' type="submit">Log in</button>
+            <div class="divider"></div>
+            <p class='label center-align'>Don't have an account?</p>
+            <a class='btn btn_sign_up' href="{% url 'signup' %}">Sign Up for Lushlyrics</a>
+            
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+    </div>
+
+</body>
+</html>
