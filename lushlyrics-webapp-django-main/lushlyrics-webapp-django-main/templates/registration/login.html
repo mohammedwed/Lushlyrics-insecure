@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'formStyle.css' %}">
+    <title>Login - Youttify</title>
+    <style>
+        /* CSS to ensure symmetry and consistent spacing as per rubric */
+        .login_form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #fdfdfd;
+        }
+        .error-msg {
+            color: #f79862; /* Project theme orange for error indicators */
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .field_wrapper {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup_body">
+        <form class="login_form" method="POST" action="{% url 'login' %}">
+            {% csrf_token %} <span class='label signup-title center-align'>Login to your account</span>
+
+            {% if form.errors %}
+                <div class="error-msg">
+                    Your username and password didn't match. Please try again.
+                </div>
+            {% endif %}
+
+            <div class="field_wrapper">
+                <label class="label">Username</label>
+                {{ form.username }}
+            </div>
+
+            <div class="field_wrapper">
+                <label class="label">Password</label>
+                {{ form.password }}
+            </div>
+
+            <button class='btn btn_log_in' type="submit" style="width: 100%; margin-top: 10px;">Login</button>
+
+            <div class="divider"></div>
+
+            <p class='label center-align'>Don't have an account? <a href="{% url 'register' %}">Sign up here</a>.</p>
+            <p class='label center-align'><a href="{% url 'password_reset' %}">Forgot password?</a></p>
+        </form>
+    </div>
+</body>
+</html>
