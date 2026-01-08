@@ -1,33 +1,21 @@
+Lushlyrics: Secure Authentication System Implementation
+Project Overview
+This project is a modified and secured version of the Lushlyrics (Youttify) web application. The primary goal was to transform an insecure application into a robust system by implementing industry-standard security practices using the Django framework.
 
+Key Security Fixes & Features
+1. Secure User Authentication
+Password Hashing: Replaced insecure manual input handling with Django’s UserCreationForm. Passwords are now automatically hashed using the PBKDF2 algorithm with a SHA256 hash, ensuring that user data is protected even if the database is compromised.
 
+Session Management: Utilized Django’s built-in auth system for secure login and logout workflows.
 
-## Setup
+2. CSRF Protection
+Added {% csrf_token %} to all registration, login, and password recovery forms. This prevents Cross-Site Request Forgery attacks, ensuring that all state-changing requests are intentional and come from authenticated users.
 
-The first thing to do is to clone the repository:
+3. Access Control (Authorization)
+Implemented the @login_required decorator for sensitive views such as Playlist and Search. Anonymous users are now automatically redirected to the login page, protecting user-specific content.
 
-```sh
-$ git clone https://github.com/mohammedwed/lushlyrics-webapp-django.git
-$ cd lushlyrics-webapp-django
-```
+4. Reliability & Bug Fixes
+Profile Management: Resolved the common DoesNotExist error by implementing get_or_create logic in the views. This ensures that every authenticated user has a corresponding profile in the database without system crashes.
 
-Create a virtual environment to install dependencies in and activate it:
-
-```sh
-$ virtualenv2 --no-site-packages env
-$ source env/bin/activate
-```
-
-Then install the dependencies:
-
-```sh
-(env)$ pip install -r requirements.txt
-```
-Note the `(env)` in front of the prompt. This indicates that this terminal
-session operates in a virtual environment set up by `virtualenv2`.
-
-Once `pip` has finished downloading the dependencies:
-```sh
-(env)$ cd spotify-clone-django
-(env)$ python manage.py runserver
-```
-And navigate to `http://127.0.0.1:8000/demo`.
+5. Account Recovery
+Integrated a secure Password Reset workflow, fulfilling the requirement for users to recover accounts via secure tokens.
