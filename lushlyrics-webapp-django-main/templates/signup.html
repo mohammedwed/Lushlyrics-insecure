@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://cdn.discordapp.com/icons/715958380556058684/773d6583cd1d7aef41e701783d353aef.webp?size=128" type="image/x-icon">
+    <meta name="description" content="Secure Sign Up - Play your playlists and favorite tracks" />
+
+    <link rel="stylesheet" href="{% static 'formStyle.css' %}">
+
+    <title>Sign Up - Youttify</title>
+
+    <style>
+        /* Modern styling to ensure Django-generated fields match the original look*/
+        .login_form input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 4px;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        .errorlist {
+            color: #f79862; /* Using the project's orange theme for errors*/
+            font-size: 0.85em;
+            list-style: none;
+            padding: 0;
+            margin: 5px 0 15px 0;
+        }
+
+        .field_wrapper {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .help_text {
+            display: block;
+            color: #888;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="signup_header">
+        <a href="/">
+            </a>
+    </div>
+
+    <div class="signup_body">
+        <form class="login_form" method="POST">
+            {% csrf_token %} <span class='label signup-title center-align'>Sign up for free to start listening.</span>
+
+            {% if form.non_field_errors %}
+                <div class="errorlist">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="field_wrapper">
+                    <label class="label" for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }} {% if field.help_text %}
+                        <small class="help_text">{{ field.help_text }}</small>
+                    {% endif %}
+
+                    {% if field.errors %}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button class='btn btn_log_in' type="submit">Sign up</button>
+
+            <div class="divider"></div>
+
+            <p class='label center-align'>Already have an account? <a href="{% url 'login' %}">Log in</a>.</p>
+        </form>
+    </div>
+
+</body>
+
+</html>
